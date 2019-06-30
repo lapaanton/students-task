@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace students_task.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/test/[controller]")]
     [ApiController]
     public class ValuesController : ControllerBase
     {

@@ -10,6 +10,13 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using System.Reflection;
+using MediatR;
+using Microsoft.EntityFrameworkCore.Sqlite;
+using Microsoft.EntityFrameworkCore;
+using students_task.Application.Interfaces;
+using students_task.Application.Users.Command.CreateUser;
+using students_task.Persistance;
 
 namespace students_task
 {
@@ -25,6 +32,13 @@ namespace students_task
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddMediatR(typeof(CreateUserCommandHandler).GetTypeInfo().Assembly);
+
+            
+            string connection = Configuration.GetConnectionString("SqliteConnection");
+            services.AddDbContext<IMyDbContext,MyDBContext>(options =>
+                options.UseSqlite(connection));
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
@@ -41,7 +55,7 @@ namespace students_task
                 app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
+           // app.UseHttpsRedirection();
             app.UseMvc();
         }
     }
