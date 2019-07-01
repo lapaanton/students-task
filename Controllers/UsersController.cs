@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using MediatR;
 using students_task.Application.Users.Queiries.GetUsersList;
+using students_task.Application.Users.Queiries.GetUser;
 using students_task.Application.Users.Command.CreateUser;
 using students_task.Application.Users.Command.DeleteUser;
 using students_task.Application.Users.Command.UpdateUser;
@@ -25,9 +26,9 @@ namespace students_task.Controllers
 
         // GET api/users/39
         [HttpGet("{id}")]
-        public ActionResult<string> Get(int id)
+        public async Task<ActionResult<UserViewModel>> Get(int id)
         {
-            return "value";
+            return await Mediator.Send(new GetUserQueiry(id));
         }
 
         /*// POST api/users/create

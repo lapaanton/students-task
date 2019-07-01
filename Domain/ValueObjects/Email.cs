@@ -27,6 +27,10 @@ namespace students_task.Domain.ValueObjects
             yield return name;
             yield return domain;
         }
+        public override string ToString()
+        {
+            return string.Format("{0}@{1}", name, domain);
+        }
         private static bool ValidateUserName(string username)
         {
             //TODO: username and domain validation validation
@@ -57,7 +61,7 @@ namespace students_task.Domain.ValueObjects
         }
         public static implicit operator string(Email email)
         {
-            return email.ToString();
+            return email==null? null : email.ToString();
         }
         public static explicit operator Email(string emailString){
             return FromString(emailString);
