@@ -13,11 +13,7 @@ namespace students_task.Persistance.Configurations
                 .HasColumnName("user_name")
                 .HasMaxLength(64)
                 .IsRequired();
-            builder.Ignore(u => u.Email);
-            /*/builder.Property(u => u.Email)
-                .HasColumnName("email")
-                .HasMaxLength(128)
-                .HasColumnType("string");*/
+            builder.OwnsOne(u => u.Email);
             
             builder.Property(u => u.IsActive)
                 .HasColumnName("is_active");

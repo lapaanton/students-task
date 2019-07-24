@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace students_task.Persistance.Migrations
+namespace students_task.Migrations
 {
-    public partial class InitialMigration : Migration
+    public partial class emailRealFix : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -26,6 +26,8 @@ namespace students_task.Persistance.Migrations
                     UserId = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     user_name = table.Column<string>(maxLength: 64, nullable: false),
+                    Email_Name = table.Column<string>(nullable: true),
+                    Email_Domain = table.Column<string>(nullable: true),
                     is_active = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>

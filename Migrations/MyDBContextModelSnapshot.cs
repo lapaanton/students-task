@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using students_task.Persistance;
 
-namespace students_task.Persistance.Migrations
+namespace students_task.Migrations
 {
     [DbContext(typeof(MyDBContext))]
     partial class MyDBContextModelSnapshot : ModelSnapshot
@@ -76,6 +76,27 @@ namespace students_task.Persistance.Migrations
                         .WithMany("Depts")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("students_task.Domain.Models.User", b =>
+                {
+                    b.OwnsOne("students_task.Domain.ValueObjects.Email", "Email", b1 =>
+                        {
+                            b1.Property<int>("UserId");
+
+                            b1.Property<string>("Domain");
+
+                            b1.Property<string>("Name");
+
+                            b1.HasKey("UserId");
+
+                            b1.ToTable("Users");
+
+                            b1.HasOne("students_task.Domain.Models.User")
+                                .WithOne("Email")
+                                .HasForeignKey("students_task.Domain.ValueObjects.Email", "UserId")
+                                .OnDelete(DeleteBehavior.Cascade);
+                        });
                 });
 #pragma warning restore 612, 618
         }
