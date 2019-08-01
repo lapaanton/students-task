@@ -9,6 +9,7 @@ using students_task.Application.Users.Queiries.GetUser;
 using students_task.Application.Users.Command.CreateUser;
 using students_task.Application.Users.Command.DeleteUser;
 using students_task.Application.Users.Command.UpdateUser;
+using students_task.Application.Exceptions;
 
 namespace students_task.Controllers
 {
@@ -28,7 +29,15 @@ namespace students_task.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<UserViewModel>> Get(int id)
         {
-            return await Mediator.Send(new GetUserQueiry(id));
+            try
+            {
+                return await Mediator.Send(new GetUserQueiry(id));
+            }
+            catch (NotFoundException ex)
+            {
+                return NotFound(ex);
+            }
+            
         }
 
         /*// POST api/users/create
