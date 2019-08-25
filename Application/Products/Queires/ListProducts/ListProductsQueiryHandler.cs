@@ -22,7 +22,7 @@ namespace students_task.Application.Products.Queiries.ListProducts
             var products = await _context.Products.ToListAsync();
             if(products == null)
             {
-                throw new System.Exception();
+                throw new NotFoundException(nameof(Product), "DB is empty");
             }
             var productList = new List<ProductListViewModel>();
             products.ForEach(p => productList.Add(new ProductListViewModel(p)));

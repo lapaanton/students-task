@@ -1,6 +1,4 @@
 using MediatR;
-using students_task.Domain.Models;
-
 
 namespace students_task.Application.Products.Commands.CreateProduct
 {
